@@ -3,11 +3,10 @@ package com.technologyconversations.learning.kata.solutions;
 import org.junit.Test;
 
 import java.util.Stack;
-import java.util.stream.IntStream;
 
-import static org.hamcrest.MatcherAssert.*;
+import static com.technologyconversations.learning.kata.solutions.ReversePolishNotationSeven.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static com.technologyconversations.learning.kata.solutions.ReversePolishNotation.*;
 
 /*
 In reverse Polish notation the operators follow their operands;
@@ -21,13 +20,15 @@ the latter could be written "3 4 - 5 *" (or 5 3 4 - *, if keeping similar format
 
 Taken from http://en.wikipedia.org/wiki/Reverse_Polish_notation.
  */
-public class ReversePolishNotationTest {
+public class ReversePolishNotationSevenTest {
 
     @Test
     public void calcSignShouldReturnStackWithTwoElementsPoppedAndOneElementPushed() {
         Stack<Double> numbers = new Stack<>();
-        IntStream.rangeClosed(1, 5).forEach(number -> numbers.add((double) number));
-        Stack<Double> actual = calcSign(numbers, (num1, num2) -> num2 / num1);
+        for (int number = 1; number <= 5; number++) {
+            numbers.add((double) number);
+        }
+        Stack<Double> actual = calcSign(numbers, Sign.DIVIDE);
         assertThat(actual.size(), is(equalTo(4)));
     }
 
@@ -36,7 +37,7 @@ public class ReversePolishNotationTest {
         Stack<Double> numbers = new Stack<>();
         numbers.push((double) 15);
         numbers.push((double) 3);
-        Stack<Double> actual = calcSign(numbers, (num1, num2) -> num2 / num1);
+        Stack<Double> actual = calcSign(numbers, Sign.DIVIDE);
         assertThat(actual.pop(), is(5.0));
     }
 
