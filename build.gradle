@@ -1,5 +1,3 @@
-package com.technologyconversations.learning.kata.solutions.tennisgame
-
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
